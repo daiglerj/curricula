@@ -16,7 +16,9 @@
 .navbarTitle{
     color: black;
 }
-
+body{
+    color: #868f98
+}
 .Jumbotron{
     background-color: #868f98;
     width: 80%;
@@ -29,13 +31,40 @@
     color:white;
     margin-top: 40px;
 }
+.textInput {
+    padding: 10px;
+    width: 60%;
+    border: solid 1px #c7c7c7;
+    box-shadow: -2px 1px #c7c7c7;
+    font-size: 14px;
+}
+.textInput::placeholder{
+    color: #c7c7c7;
+    opacity: 1; /* Firefox */
+}
+.textInput:focus{
+    outline-color: #82ca9c
+}
 
+.BuildCourseForm .RadioInput label{
+    display: inline;
+    margin-Left: 3px;
+    margin-Right:10px;
+    font-weight: 100;
+}
+.BuildCourseForm .RadioInput label:first-child{
+    font-weight: normal;
+}
+.searchCourse::-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: lightgrey;
+}
 .courseSearch{
     margin:auto;
     padding:auto;
     margin-top: 30px;
     text-align: center;
     width: 60%;
+    
     
 }
 
@@ -56,4 +85,60 @@
 }
 select option:disabled{
     color: grey
+}
+
+.BuildCourseForm label{
+    display:block;
+    color: #878e98;
+    margin-bottom:5px;
+}
+
+.Instructions {
+    color: #86909a;
+    width:60%;
+    text-align: center;
+    border-bottom: 1px solid;
+    padding-bottom: 20px;
+    margin:auto;
+    margin-top: 20px;
+}
+
+.CategoryHeading{
+    text-align: left;
+    font-size: 20px;
+    font-weight: normal;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#TopFooter{
+    height: 125px;
+    background-color: #51565a;
+    color:white;
+    text-align:left;
+    padding-left: 30px;
+    padding-top: 40px
+}
+#TopFooter h1{
+    font-size: 15px;
+    font-weight: normal;
+}
+#TopFooter p{
+    font-size: 12px;
+    font-weight: normal;
+    margin-top:0px;
+    margin-bottom:5px;
+}
+#BottomFooter{
+    height:50px;
+    color:white;
+    background-color: #363a3d;
+}
+#BottomFooter .footerText{
+   margin-left: 10px;
+   vertical-align: middle;
+}
+#BottomFooter .material-icons{
+    padding-top:10px;
+    line-height: 20px;
 }

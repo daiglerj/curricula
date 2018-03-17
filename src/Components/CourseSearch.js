@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './../App.css';
+import TopCourses from "./Home/TopCourses"
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -15,15 +16,15 @@ export default class CourseSearch extends Component {
             width: "600px",
             margin:"auto",
             boxShadow: "-2px 1px #c7c7c7",
-            padding: "10px"
+            padding: "5px"
         }
         var dropdownBox = {
             borderRight:"solid #c7c7c7 2px",
             paddingRight: "30px",
             marginRight: "30px",
             display:"inline-block",
-            height: "50px",
-            lineHeight:"50px"
+            height: "30px",
+            lineHeight:"30px"
         }
         var searchStyle = {
             padding: "10px",
@@ -53,6 +54,8 @@ export default class CourseSearch extends Component {
                     </span>
                     <input className="searchCourse" style={searchStyle} placeholder="Find Lesson Plans and Course Material" />
                 </div>
+            
+                <TopCourses />
             </div>
         )
     }
