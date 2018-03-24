@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import Navbar from './../Components/Navbar';
 import BuildCourseForm from "./../Components/BuildCourse/BuildCourseForm.js"
 
-class Home extends Component {
+class BuildCourse extends Component {
   render() {
     return (
       <div className="App">
@@ -16,4 +16,4 @@ class Home extends Component {
 }
 
 
-export default Home;
+export default BuildCourse;

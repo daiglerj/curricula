@@ -1,6 +1,8 @@
 const initialState = {
     username: '',
-    name: ''
+    firstName: '',
+    lastName: '',
+    
 }
 
 const userReducer = (state=initialState,action)=>{
@@ -8,8 +10,14 @@ const userReducer = (state=initialState,action)=>{
         case "SET_USERNAME": {
             return {...state,username:action.payload}
         }
-        case "SET_NAME": {
-            return {...state,name:action.payload}
+        case "SET_FIRST_NAME": {
+            return {...state,firstName:action.payload}
+        }
+        case "SET_LAST_NAME":{
+            return {...state,lastName:action.payload}
+        }
+        case "SET_ID":{
+            return {...state, ID:action.payload}
         }
         default:{
             return state

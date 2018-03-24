@@ -5,9 +5,24 @@ export function setUsername(username){
     }
 }
 
-export function setName(name){
+export function setFirstName(name){
     return{
-        type: "SET_NAME",
+        type: "SET_FIRST_NAME",
         payload: name
     }
 }
+
+export function setLastName(name){
+    return{
+        type: "SET_LAST_NAME",
+        payload:name
+    }
+}
+
+export function setID(id){
+    return{
+        type: "SET_ID",
+        payload:id
+    }
+}
+

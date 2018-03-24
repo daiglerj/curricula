@@ -4,7 +4,8 @@ import Home from "./Routes/Home"
 import BuildCourse from "./Routes/BuildCourse"
 import Navbar from "./Components/Navbar"
 import Footer from "./Components/Footer"
-
+import CourseDetail from "./Routes/CourseDetail"
+import Profile from "./Routes/Profile"
 class App extends Component {
   render() {
     return (
@@ -15,6 +16,9 @@ class App extends Component {
 
                 <Route exact={true} path="/" component={()=>{return <Home />}} />
                 <Route  path="/BuildCourse" component={()=>{return <BuildCourse />}} />
+                <Route  path="/CourseDetail" component={()=>{return <CourseDetail />}} />
+                <Route  path="/Profile" component={()=>{return <Profile />}} />
+
                 <Footer />
             </div>
         </BrowserRouter>
