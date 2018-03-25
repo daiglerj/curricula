@@ -1,5 +1,4 @@
 .outerDiv{
-    margin-bottom: 10px
 }
 
 
@@ -48,9 +47,8 @@
     display: inline-block;
     border-left: solid 1px;
     padding-left: 50px;
-    margin-bottom: 70px;
 }
-i{
+.outerDiv i{
     vertical-align: middle;
 }
 

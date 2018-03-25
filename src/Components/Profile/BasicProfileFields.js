@@ -27,7 +27,10 @@ class ProfileFields extends Component{
         super(props)
         
         this.state = {
-            firstName: this.props.firstName
+            firstName: this.props.firstName,
+            lastName: this.props.lastName,
+            username: this.props.username,
+            phoneNumber: this.props.phoneNumber
         }
         this.handleFirstNameChange = this.handleFirstNameChange.bind(this)
         this.handleLastNameChange = this.handleLastNameChange.bind(this)
@@ -36,12 +39,17 @@ class ProfileFields extends Component{
         
     }
     componentWillReceiveProps(nextProps){
+        console.log("TEST: " + nextProps.firstName)
+        console.log(nextProps.lastName)
         this.setState({
             firstName: nextProps.firstName,
             lastName: nextProps.lastName,
             username: nextProps.username,
             phoneNumber: nextProps.phoneNumber
         })
+    }
+    componentDidMount(){
+        console.log("Here")
     }
     
     handleFirstNameChange(event){

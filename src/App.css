@@ -9,6 +9,10 @@
 .App-intro {
   font-size: large;
 }
+html{
+      height: 100%;
+  box-sizing: border-box;
+}
 .navbar{
     background-color: white !important;
     height: 50px !important;
@@ -17,7 +21,12 @@
     color: black;
 }
 body{
-    color: #868f98
+    color: #868f98;
+    min-height: 100%;
+    position: relative;
+      margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
 }
 .Jumbotron{
     background-color: #868f98;
@@ -110,7 +119,9 @@ select option:disabled{
     margin-left: 100px;
     margin-top: 50px;
 }
-
+#Footer{
+    margin-top: 175px;
+}
 #TopFooter{
     height: 125px;
     background-color: #51565a;
@@ -120,6 +131,8 @@ select option:disabled{
     padding-top: 20px;
     padding-bottom:20px;
     width:100%;
+    position: absolute;
+    bottom:0;
 }
 #TopFooter h1{
     font-size: 15px;
@@ -137,6 +150,8 @@ select option:disabled{
     background-color: #363a3d;
     width: 100%;
     display: block;
+    position: absolute;
+    bottom:0;
 }
 #BottomFooter .footerText{
    margin-left: 10px;

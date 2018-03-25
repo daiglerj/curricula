@@ -46,9 +46,9 @@ export default class PasswordChange extends Component {
         }
         return(
             <div className="Fields">
-                <i class="material-icons" style = {keyColor} >vpn_key</i><input className="textInput" placeholder="Enter your current password" onChange = {this.currentPasswordChange}/><br />
-                <i class="material-icons" style = {lockColor}>lock</i><input className="textInput" placeholder="Enter your new password"   onChange={this.handlePassword}/><br />
-                <i class="material-icons" style = {lockOutlineColor}>lock</i><input className="textInput" placeholder="Your new password just one more time" onChange={this.handlePasswordConfirm}  /><br />
+                <i class="material-icons" style = {keyColor} >vpn_key</i><input type='password' className="textInput" placeholder="Enter your current password" onChange = {this.currentPasswordChange} /><br />
+                <i class="material-icons" style = {lockColor}>lock</i><input type='password' className="textInput" placeholder="Enter your new password"   onChange={this.handlePassword}/><br />
+                <i class="material-icons" style = {lockOutlineColor}>lock</i><input type='password' className="textInput" placeholder="Your new password just one more time" onChange={this.handlePasswordConfirm}  /><br />
                 <RaisedButton className =  "saveButton" label="Save" backgroundColor="#82ca9c" labelColor="white"/>
 
             

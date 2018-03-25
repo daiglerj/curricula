@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './../App.css';
 import {Link} from 'react-router-dom'
-import { setUsername, setFirstName, setID, setLastName } from './../Actions/userActions'
+import { setUsername, setFirstName, setID, setLastName, signOut } from './../Actions/userActions'
 import { connect } from "react-redux"
 
 //Materials Imports
@@ -26,12 +26,12 @@ const mapDispatchToProps = (dispatch)=>{
         setUsername: (name)=>dispatch(setUsername(name)),
         setFirstName: (name)=>dispatch(setFirstName(name)),
         setLastName: (name)=>dispatch(setLastName(name)),
-        setID: (id)=>dispatch(setID(id))
+        setID: (id)=>dispatch(setID(id)),
+        signOut: ()=>dispatch(signOut())
     }
 }
 
 class Navbar extends Component {
-
     render(){
         var navbarStyle = {
             color:"grey",
@@ -47,7 +47,7 @@ class Navbar extends Component {
                             />
         }
         else{
-            rightElement = <LoggedIn name = {this.props.firstName}/>
+            rightElement = <LoggedIn name = {this.props.firstName} signOut={this.props.signOut}/>
         }
         return (
             <div>
@@ -337,7 +337,7 @@ class LoggedIn extends Component{
             <div>
                 <Link to = "/BuildCourse"><FlatButton {...this.props} style={buttonStyle} label="Build a Course" /></Link>
                 <Link to = "/Profile"><FlatButton {...this.props} style={greetingStyle} label={name} /></Link>
-
+                <a href="/"><FlatButton style={buttonStyle} onClick={this.props.signOut} label="Sign Out" /></a>
             </div>
         )
     }

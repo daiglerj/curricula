@@ -2,6 +2,7 @@ const initialState = {
     username: '',
     firstName: '',
     lastName: '',
+    phoneNumber: ''
     
 }
 
@@ -19,6 +20,15 @@ const userReducer = (state=initialState,action)=>{
         case "SET_ID":{
             return {...state, ID:action.payload}
         }
+        case "SIGN_OUT":{
+            return {
+                username: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: ''
+            }
+        }
+    
         default:{
             return state
         }

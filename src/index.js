@@ -5,7 +5,22 @@ import App from './App';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux'
-import store from "./store"
+import {store} from "./store"
+import {persistor} from "./store"
 
-ReactDOM.render(<Provider store={store}><MuiThemeProvider><App /></MuiThemeProvider></Provider>, document.getElementById('root'));
+import { PersistGate } from 'redux-persist/integration/react'
+
+ReactDOM.render(
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+
+                <MuiThemeProvider>
+                    <App />
+                </MuiThemeProvider>
+          </PersistGate>
+
+        </Provider>,
+
+    
+    document.getElementById('root'));
 registerServiceWorker();
