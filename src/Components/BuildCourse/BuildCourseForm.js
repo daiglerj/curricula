@@ -1,17 +1,32 @@
 import React, {Component} from 'react' 
 import Jumbotron from "./../../Components/Jumbotron"
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from "react-redux"
+import {setTitle, setSubtitle, setDescription, setDifficulty, setRequiredMaterials,setPrerequisites } from "./../../Actions/courseEditorActions"
 
-export default class BuildCourseForm extends Component{
+const mapStateToProps=(state)=>{
+    
+}
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        setTitle: (title)=>dispatch(setTitle(title)),
+        setSubtitle: (subTitle)=>dispatch(setSubtitle(subTitle)),
+        setDescription: (description)=>dispatch(setDescription(description)),
+        setDifficulty: (difficulty)=>dispatch(setDifficulty(difficulty)),
+        setRequiredMaterials: (requiredMaterials)=>dispatch(setRequiredMaterials(requiredMaterials)),
+        setPrerequisites: (prerequisites)=>dispatch(setPrerequisites(prerequisites))        
+    }  
+}
+class BuildCourseForm extends Component{
     constructor(props){
         super(props)
         this.state = {
             Title: "",
             Subtitle: "",
             Description: "",
-            LevelOfDifficulty: "",
+            Difficulty: "Novice",
             RequiredMaterials: "",
-            RecommendedPrerequisites: ""
+            Prerequisites: ""
         }
         
         this.handleTitle = this.handleTitle.bind(this)
@@ -19,6 +34,8 @@ export default class BuildCourseForm extends Component{
         this.handleDescription = this.handleDescription.bind(this)
         this.handleRequiredMaterials = this.handleRequiredMaterials.bind(this)
         this.handleRecommendedPrerequisites = this.handleRecommendedPrerequisites.bind(this)
+        
+        this.onSubmit = this.onSubmit.bind(this)
 
     }
     handleTitle(event){
@@ -47,8 +64,19 @@ export default class BuildCourseForm extends Component{
     
     handleRecommendedPrerequisites(event){
         this.setState({
-            RecommendedPrerequisites: event.target.value
+            Prerequisites: event.target.value
         })
+    }
+    
+    onSubmit(){
+        console.log("Title: " + this.state.Title)
+        //Set State
+        this.props.setTitle(this.state.Title)
+        this.props.setSubtitle(this.state.Subtitle)
+        this.props.setDescription(this.state.Description)
+        this.props.setDifficulty(this.state.Difficulty)
+        this.props.setRequiredMaterials(this.state.RequiredMaterials)
+        this.props.setPrerequisites(this.state.Prerequisites)
     }
     render(){
         var formStyle = {
@@ -71,15 +99,15 @@ export default class BuildCourseForm extends Component{
             <div>
                 <Jumbotron />
                 <Instructions />
-                <form className="BuildCourseForm" style={formStyle}>                  
+                <form className="BuildCourseForm" style={formStyle}>        
                     <TextInput label="Title" placeholder="Name your course" inputChange = {this.handleTitle} />
                     <TextInput label="Subtitle" placeholder="Add some flare" inputChange = {this.handleSubtitle}/>
                     <TextInput label="Description" placeholder="Just add more detail" LargeField inputChange = {this.handleDescription}/>
                     <DifficultyInput />
                     <TextInput label="Required Materials" placeholder="e.g. Microsoft Word, Adobe Photoshop, MySQL, etc." inputChange = {this.handleRequiredMaterials} />
                     <TextInput label="Recommended Prerequisites" placeholder="e.g. Introductory Biology, Calculus A, Algebra 101" inputChange = {this.handleRecommendedPrerequisites} />
-                    <RaisedButton label="Next" backgroundColor="#82ca9c" labelColor="white" style={ButtonStyle}/>
-
+                    <RaisedButton label="Next" backgroundColor="#82ca9c" labelColor="white" style={ButtonStyle} onClick ={this.onSubmit} />
+                    
                 </form>
             </div>
         )
@@ -156,3 +184,5 @@ const Instructions = ()=>{
     )
     
 }
+
+export default connect(mapStateToProps,mapDispatchToProps)(BuildCourseForm)
