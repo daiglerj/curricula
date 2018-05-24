@@ -39,3 +39,21 @@ export function setPrerequisites(prerequisites){
         payload: prerequisites 
     }
 }
+export function setCourseID(id){
+    return{
+        type:"SET_COURSE_ID",
+        payload:id
+    }
+}
+export function setPrice(price){
+    return{
+        type: "SET_PRICE",
+        payload:price
+    }
+}
+export function setAuthor(authorName){
+    return{
+        type: "SET_AUTHOR",
+        payload: authorName
+    }
+}

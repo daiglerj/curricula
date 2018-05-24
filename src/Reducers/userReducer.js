@@ -2,7 +2,8 @@ const initialState = {
     username: '',
     firstName: '',
     lastName: '',
-    phoneNumber: ''
+    phoneNumber: '',
+    ID: ''
     
 }
 

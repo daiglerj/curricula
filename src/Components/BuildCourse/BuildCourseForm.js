@@ -1,11 +1,18 @@
 import React, {Component} from 'react' 
-import Jumbotron from "./../../Components/Jumbotron"
+import Jumbotron from "./../../Components/Jumbotron";
+import {Link} from 'react-router-dom'
+
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from "react-redux"
-import {setTitle, setSubtitle, setDescription, setDifficulty, setRequiredMaterials,setPrerequisites } from "./../../Actions/courseEditorActions"
+import {setTitle, setSubtitle, setDescription, setDifficulty, setRequiredMaterials,setPrerequisites, setCourseID, setPrice } from "./../../Actions/courseEditorActions"
 
 const mapStateToProps=(state)=>{
-    
+    return {
+        baseURL: state.app.baseURL,
+        ID: state.user.ID,
+
+    }
+
 }
 const mapDispatchToProps=(dispatch)=>{
     return {
@@ -14,19 +21,36 @@ const mapDispatchToProps=(dispatch)=>{
         setDescription: (description)=>dispatch(setDescription(description)),
         setDifficulty: (difficulty)=>dispatch(setDifficulty(difficulty)),
         setRequiredMaterials: (requiredMaterials)=>dispatch(setRequiredMaterials(requiredMaterials)),
-        setPrerequisites: (prerequisites)=>dispatch(setPrerequisites(prerequisites))        
+        setPrerequisites: (prerequisites)=>dispatch(setPrerequisites(prerequisites)),   
+        setCourseID: (id)=>dispatch(setCourseID(id)),
     }  
 }
-class BuildCourseForm extends Component{
+
+class BuildCourse extends Component{
+    
+    render(){
+        return(
+            <div>
+            <Jumbotron />
+            <div className = "Section BuildCourse">
+                <Instructions />
+                <BuildCourseForm {...this.props} />
+            </div>
+            </div>
+        )
+    }
+}
+export class BuildCourseForm extends Component{
     constructor(props){
         super(props)
         this.state = {
-            Title: "",
-            Subtitle: "",
-            Description: "",
+            Title: this.props.Title || "",
+            Subtitle: this.props.Subtitle || "",
+            Description: this.props.Description || "",
             Difficulty: "Novice",
-            RequiredMaterials: "",
-            Prerequisites: ""
+            RequiredMaterials: this.props.RequiredMaterials,
+            Prerequisites: this.props.Prerequisites,
+            error: ""
         }
         
         this.handleTitle = this.handleTitle.bind(this)
@@ -34,9 +58,22 @@ class BuildCourseForm extends Component{
         this.handleDescription = this.handleDescription.bind(this)
         this.handleRequiredMaterials = this.handleRequiredMaterials.bind(this)
         this.handleRecommendedPrerequisites = this.handleRecommendedPrerequisites.bind(this)
-        
         this.onSubmit = this.onSubmit.bind(this)
+        this.setError = this.setError.bind(this)
 
+    }
+
+    componentWillReceiveProps(){
+        console.log("Test: " + this.props.Title)
+        console.log("Test: " + this.props.Description)
+        console.log("hello")
+        this.setState({
+            Title: this.props.Title,
+            Description: this.props.Description,
+            Subtitle: this.props.Subtitle
+
+
+        })
     }
     handleTitle(event){
      this.setState({
@@ -67,16 +104,56 @@ class BuildCourseForm extends Component{
             Prerequisites: event.target.value
         })
     }
-    
+
     onSubmit(){
         console.log("Title: " + this.state.Title)
         //Set State
-        this.props.setTitle(this.state.Title)
-        this.props.setSubtitle(this.state.Subtitle)
-        this.props.setDescription(this.state.Description)
-        this.props.setDifficulty(this.state.Difficulty)
-        this.props.setRequiredMaterials(this.state.RequiredMaterials)
-        this.props.setPrerequisites(this.state.Prerequisites)
+
+        
+        let fetchURL = this.props.baseURL + "buildCourse"
+        console.log(fetchURL)
+        let fetchOptions = {
+            method: "post",
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                Title: this.state.Title,
+                Subtitle: this.state.Subtitle,
+                Description: this.state.Description,
+                Difficulty: this.state.Difficulty,
+                Materials: this.state.RequiredMaterials,
+                Prerequisites: this.state.Prerequisites,
+                OwnerID: this.props.ID,
+                Price: this.state.Price
+            })
+        }
+
+        fetch(fetchURL,fetchOptions).then((response)=>{
+            response.json().then(result=>{
+                console.log(result)
+                if(response.status==200){
+                    this.props.setCourseID(result.insertId)
+
+                    window.location = 'http://localhost:3000/EditCourse';
+                }
+                else{
+                    this.setError(result.message)
+                }
+
+            })
+        })
+        
+    }
+    onEdit(){
+        let fetchURL = this.props.baseURL + "editCourse"
+
+
+    }
+    setError(err){
+        this.setState({
+            error: err
+        })
     }
     render(){
         var formStyle = {
@@ -97,18 +174,16 @@ class BuildCourseForm extends Component{
 
         return(
             <div>
-                <Jumbotron />
-                <Instructions />
-                <form className="BuildCourseForm" style={formStyle}>        
-                    <TextInput label="Title" placeholder="Name your course" inputChange = {this.handleTitle} />
-                    <TextInput label="Subtitle" placeholder="Add some flare" inputChange = {this.handleSubtitle}/>
-                    <TextInput label="Description" placeholder="Just add more detail" LargeField inputChange = {this.handleDescription}/>
-                    <DifficultyInput />
-                    <TextInput label="Required Materials" placeholder="e.g. Microsoft Word, Adobe Photoshop, MySQL, etc." inputChange = {this.handleRequiredMaterials} />
-                    <TextInput label="Recommended Prerequisites" placeholder="e.g. Introductory Biology, Calculus A, Algebra 101" inputChange = {this.handleRecommendedPrerequisites} />
-                    <RaisedButton label="Next" backgroundColor="#82ca9c" labelColor="white" style={ButtonStyle} onClick ={this.onSubmit} />
+                <form className="BuildCourseForm" style={formStyle}>  
+                    <p className = "error">{this.state.error}</p>      
+                    <TextInput label="Title" value = {this.state.Title} placeholder="Name your course" inputChange = {this.handleTitle} />
+                    <TextInput label="Subtitle" value = {this.state.Subtitle} placeholder="Add some flare" inputChange = {this.handleSubtitle}/>
+                    <TextInput label="Description" value = {this.state.Description} placeholder="Just add more detail" LargeField inputChange = {this.handleDescription}/>
+                   
+                   <RaisedButton label="Save" backgroundColor="#82ca9c" labelColor="white" style={ButtonStyle} onClick ={this.onSubmit} />
                     
                 </form>
+
             </div>
         )
     }
@@ -126,10 +201,10 @@ class TextInput extends Component{
 
         let field = null
         if (!this.props.LargeField){
-            field = <input className="textInput" onChange = {this.props.inputChange} placeholder={this.props.placeholder} />
+            field = <input className="textInput" onChange = {this.props.inputChange} value= {this.props.value} placeholder={this.props.placeholder} />
         }
         else{
-            field = <textarea  className="textInput" onChange = {this.props.inputChange} placeholder={this.props.placeholder} />
+            field = <textarea  className="textInput" onChange = {this.props.inputChange} value = {this.props.value} placeholder={this.props.placeholder} />
         }
         return(
             <div>
@@ -184,5 +259,4 @@ const Instructions = ()=>{
     )
     
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(BuildCourseForm)
+export default connect(mapStateToProps,mapDispatchToProps)(BuildCourse)

@@ -4,7 +4,8 @@ const initialState = {
     description: "",
     difficulty: "",
     requiredMaterials: "",
-    prerequisites: ""
+    prerequisites: "",
+    courseID: ""
     
 }
 
@@ -29,7 +30,15 @@ const courseEditor = (state=initialState,action)=>{
         case "SET_PREREQUISITES":{
             return {...state, prerequisites:action.payload}
         }
-            
+        case "SET_COURSE_ID":{
+            return {...state, courseID: action.payload}
+        }
+        case "SET_PRICE":{
+            return {...state,Price:action.payload}
+        }
+        case "SET_AUTHOR_NAME":{
+            return {...state, authorName:action.payload}
+        }
         default:{
             return state
         }

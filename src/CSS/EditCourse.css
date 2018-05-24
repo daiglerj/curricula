@@ -1,0 +1,104 @@
+body{
+}
+.CourseHeader{
+	width: 100%;
+	background-color:  #ebebeb; 
+	padding-top: 50px;
+	color: #464646;
+	margin-bottom: 0px;
+}
+.CourseHeader .Circle{
+	width: 75px;
+	height: 75px;
+	background-color: #464646;
+	margin:auto;
+	border-radius:100px;
+}
+.CourseHeader h1{
+	margin-bottom: 0px;
+	font-weight: 400;
+}
+.CourseHeader p{
+	margin-top: 3px;
+	font-weight: 200;
+}
+
+.Links ul{
+	margin-top: 40px;
+	padding-bottom: 30px;
+}
+.Links li{
+	list-style: none;
+	display: inline;
+	margin-right: 40px;
+	cursor:pointer;
+	padding-bottom: 4px;
+
+}
+
+.Chapter{
+	width :80%;
+	margin:auto;
+	margin-top: 50px;
+
+}
+.Box {
+	border: solid 1px lightgrey;
+	text-align: left;
+	padding: 10px;
+	display: inline-block;
+	width: 80%;
+	margin-right: 20px;
+	vertical-align: middle;
+
+}
+.Box i{
+	vertical-align: middle;
+	float: right;
+	cursor:pointer;
+}
+.Box span{
+	vertical-align: middle;
+	position: relative;
+	top: 3px;
+}
+.addMaterial{
+	width: 30px;
+	height:30px;
+	border-radius: 50px;
+	border:none;
+	cursor:pointer;
+	background-color: #96d0e8;
+	color:white;
+	font-size: 20px;
+	vertical-align: middle;
+
+}
+.addMaterial span{
+	position: relative;
+	bottom: 1px;
+}
+.addMaterial:hover{
+	background-color: #78c2e3;
+}
+.addMaterial:active{
+	outline: none;
+}
+
+.Materials li{
+	list-style: none;
+	margin-bottom: 5px;
+	width:83%;
+	cursor:pointer;
+	padding:5px;
+}
+.Materials li:hover{
+	background-color: lightgrey;
+}
+.Chapter i {
+	vertical-align: middle;
+	margin-left: 10px;
+	font-size: 30px;
+	cursor: pointer
+}
+

@@ -1,16 +1,19 @@
 import React, {Component} from "react"
+import RaisedButton from 'material-ui/RaisedButton';
+import {Elements} from 'react-stripe-elements';
+import {StripeProvider} from 'react-stripe-elements';
 
-export default class CourseTitle extends Component{
+import {CardElement} from 'react-stripe-elements';
+
+export default class Purchase extends Component{
+    componentDidMount(){
+
+
+    }
     render(){
-        var cartButton ={
-            backgroundColor: "white",
-            border: "solid 2px #82ca9c",
-            color: "#82ca9c"
-        }
         return(
             <div className="PurchaseButtons">
-                <button>Purchase</button>
-                <button style={cartButton} >Add to Cart</button>
+                <RaisedButton label="Purchase" backgroundColor="#82ca9c" labelColor="white" onClick = {this.props.handlePaymentModal}/>
             </div>
         )
     }

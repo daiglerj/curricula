@@ -1,0 +1,89 @@
+#header{
+	width: 90%;
+	background-color: #ebebeb;
+	height: 150px;
+	margin:auto;
+	margin-top: 20px;
+	position: relative;
+}
+#header h1{
+	text-align: left;
+	line-height: 100px;
+	display: inline-block;
+	vertical-align: middle;
+	float: left;
+	text-align:left;
+	margin: 0px;
+	margin-top: 20px;
+	font-weight: 400;
+	color:#555;
+	font-size: 40px;
+}
+.box{
+	width:100px;
+	height:100px;
+	background-color: #868f98;
+	display: inline-block;
+	text-align: left;
+	float: left;
+	vertical-align: middle;
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:20px;
+}
+#header .underline{
+	background-color: rgb(130, 202, 156);
+	width: 100px;
+	height: 5px;
+	display: inline-block;
+	float:left;
+	position: absolute;
+	bottom:45px;
+	left:140px;
+}
+#Description{
+	width: 80%;
+	margin:auto;
+	padding-left: 20px;
+	margin-top: 70px;
+	text-align: left;
+	box-shadow: -2px 2px #c4c4c4;
+	border-radius: 5px;
+	padding:20px;
+}
+#Description h1{
+	margin-bottom: 5px;
+	font-weight: 500;
+}
+
+#Description .line{
+	display: block;
+	height: 1px;
+	background-color: grey;
+	width: 40px;
+	margin-left:5px;
+}
+
+.chapter{
+	width: 70%;
+	margin:auto;
+	margin-top: 20px;
+	text-align: left;
+
+}
+.chapterTitle{
+	background-color: rgb(130, 202, 156);
+	color:white;
+	padding:10px;
+	cursor: pointer;
+}
+
+.documents{
+	list-style-type: none;
+	margin:10px;
+	cursor: pointer
+}
+.documents:hover{
+	text-decoration:underline; 
+}
+

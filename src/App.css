@@ -11,7 +11,7 @@
 }
 html{
       height: 100%;
-  box-sizing: border-box;
+        box-sizing: border-box;
 }
 .navbar{
     background-color: white !important;
@@ -20,6 +20,9 @@ html{
 .navbarTitle{
     color: black;
 }
+.error{
+    color:red;
+}
 body{
     color: #868f98;
     min-height: 100%;
@@ -27,6 +30,7 @@ body{
       margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
+  background: #eee;
 }
 .Jumbotron{
     background-color: #868f98;
@@ -54,7 +58,14 @@ body{
 .textInput:focus{
     outline-color: #82ca9c
 }
+.BuildCourse{
+    background-color: white;
+    padding: 50px;
+    width: 80%;
+    margin: auto;
+    margin-top: 70px;
 
+}
 .BuildCourseForm .RadioInput label{
     display: inline;
     margin-Left: 3px;
@@ -161,36 +172,49 @@ select option:disabled{
     padding-top:10px;
     line-height: 20px;
 }
+.Section{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    padding: 20px;
 
+}
 .CourseDescriptionOuter{
-    width: 500px;
+    width: 50%;
     margin-left: 100px;
     text-align: left;
     margin-top: 40px;
-    
+    background-color: white;
+    padding: 20px;
+    color: #52575b;
+
+
 }
 .CourseDescriptionOuter h1{
     text-align: left;
     width:350px;
-    font-size:20px;
-    font-weight: 400;
+    font-size:25px;
+    font-weight: 300;
     margin-bottom: 0px;
+    color: #52575b;
+
 }
 .CourseDescriptionOuter p{
     font-size: 15px;
     font-weight: 100;
 }
-.CourseDescriptionOuter hr{
+.Section hr{
     width:50px;
     text-align: left;
     margin-left:0px;
     margin-top: 10px;
+    color: #52575b
 }
 
 .CourseTitleOuter{
     margin-top:40px;
     text-align: left;
     margin-left:100px;
+    color: #52575b
 }
 .CourseTitleOuter h1{
     display:inline-block;
@@ -212,7 +236,7 @@ select option:disabled{
 .block{
     height:100px;
     width: 100px;
-    background-color: grey;
+    background-color: #868f98;
     display:inline-block;
     vertical-align: middle;
 }
@@ -234,4 +258,47 @@ select option:disabled{
     font-size: 15px;
     cursor:pointer;
     font-weight: 300;
+}
+
+.Instruction p{
+    margin-bottom: 10px;
+}
+
+.CourseOverview{
+    width: 20%;
+    display: inline-block;
+    position: absolute;
+    top: 250px;
+    right: 100px;
+    text-align: left;
+    color: #52575b;
+
+}
+.CourseOverview h1{
+    font-weight: 300;
+    font-size: 25px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .CourseOverview{
+        display: block;
+        position: static;
+        width: 50%;
+        margin-left: 100px;
+        text-align: left;
+        margin-top: 40px;
+    }
+    .PurchaseButtons{
+        display: block;
+        position: static;
+        text-align: left;
+        margin-left: 100px;
+        margin-top: 20px;
+    }
+}
+
+.forgotPassword{
+    margin-top:30px;
+    display: block;
 }

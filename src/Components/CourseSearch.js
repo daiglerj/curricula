@@ -4,6 +4,8 @@ import TopCourses from "./Home/TopCourses"
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+
 export default class CourseSearch extends Component {
     constructor(props){
         super(props)
@@ -16,7 +18,9 @@ export default class CourseSearch extends Component {
             width: "600px",
             margin:"auto",
             boxShadow: "-2px 1px #c7c7c7",
-            padding: "5px"
+            padding: "5px",
+            display:"inline-block",
+            marginRight:"10px"
         }
         var dropdownBox = {
             borderRight:"solid #c7c7c7 2px",
@@ -38,6 +42,10 @@ export default class CourseSearch extends Component {
             border:"none",
             fontSize: "15px"
         }
+        var searchLabelStyle={
+            color:"white"
+        }
+
         return(
             <div className = "courseSearch">
                 <div style={formStyle}>
@@ -54,7 +62,7 @@ export default class CourseSearch extends Component {
                     </span>
                     <input className="searchCourse" style={searchStyle} placeholder="Find Lesson Plans and Course Material" />
                 </div>
-            
+                <FlatButton label="search" backgroundColor="#82ca9c" labelStyle={searchLabelStyle} />
                 <TopCourses />
             </div>
         )

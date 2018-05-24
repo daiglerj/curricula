@@ -12,14 +12,18 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import SvgIcon from 'material-ui/SvgIcon';
 import Dialog from 'material-ui/Dialog';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+
+import "./../App.css"
 
 const mapStateToProps = (state) => {
   return {
       username: state.user.username,
       baseURL: state.app.baseURL,
       firstName: state.user.firstName
-  }
-      
+  }    
 }
 const mapDispatchToProps = (dispatch)=>{
     return{
@@ -45,6 +49,7 @@ class Navbar extends Component {
                                 setLastName={this.props.setLastName}
                                 setID = {this.props.setID}
                             />
+
         }
         else{
             rightElement = <LoggedIn name = {this.props.firstName} signOut={this.props.signOut}/>
@@ -70,6 +75,8 @@ class Login extends Component {
             signupOpen: false,
             usernameField: "",
             passwordField: "",
+            signUpError: "",
+            loginError: ""
         }
         this.handleLoginOpen = this.handleLoginOpen.bind(this)
         this.handleLoginClose = this.handleLoginClose.bind(this)
@@ -84,7 +91,8 @@ class Login extends Component {
         this.handleLastNameChange = this.handleLastNameChange.bind(this)
         this.handleUsernameSignUpChange = this.handleUsernameSignUpChange.bind(this)
         this.handlePasswordConfirmChange = this.handlePasswordConfirmChange.bind(this)
-        
+        this.handleSignupError = this.handleSignupError.bind(this)
+
         //Supporting Functions
         this.signIn = this.signIn.bind(this)
     }
@@ -158,10 +166,13 @@ class Login extends Component {
     * Login and Sign Up 
     */
     handleLogin = ()=>{        
-        this.signIn(this.state.usernameField,this.state.passwordField)
-        this.setState({
-            loginOpen:false
-        })
+        let login = this.signIn(this.state.usernameField,this.state.passwordField)
+        if(login){
+            this.setState({
+                loginOpen:false
+            })
+        }
+
     }
     handleSignUp = ()=>{
         //need fetch request
@@ -183,15 +194,32 @@ class Login extends Component {
         }
         fetch(url,options).then((response,body)=>{
             console.log(response)
-            if(response.status!=404){
+            if(response.status==404){
                 console.log(response.status)
+                return false
             }
-        }).then(()=>{
-            
-            this.signIn(this.state.usernameSignUp,this.state.passwordSignUp)
+            else if(response.status==400){
+                console.log(response)
+                response.json().then(result=>{
+                      this.handleSignupError(result.message)
+                })
+                return false
+            }
+            return true
+        }).then((success)=>{
+            if(success){
+                console.log("Success")
+                this.signIn(this.state.usernameSignUp,this.state.passwordSignUp)
+            }
         })
         
         
+    }
+
+    handleSignupError(error){
+        this.setState({
+            signUpError: error
+        })
     }
     signIn(username,password){
         let signInOptions = {
@@ -207,12 +235,21 @@ class Login extends Component {
         let signInURL = this.props.baseURL + "signIn"
         fetch(signInURL,signInOptions).then((response,body)=>{
             console.log(response)
-            response.json().then(result=>{
-                this.props.setUsername(result.Username)
-                this.props.setFirstName(result.FirstName)
-                this.props.setLastName(result.LastName)
-                this.props.setID(result.ID)
-            })
+            if(response.status !=200){
+                this.setState({
+                    loginError: "Username and password do not match or user does not exist"
+                })
+                return  false
+            }
+            else{
+                response.json().then(result=>{
+                    this.props.setUsername(result.Username)
+                    this.props.setFirstName(result.FirstName)
+                    this.props.setLastName(result.LastName)
+                    this.props.setID(result.ID)
+                    return true
+                })
+            }
         })
     }
 
@@ -264,14 +301,15 @@ class Login extends Component {
                 onClick = {this.handleSignUp}
             />
             ]
-
+        const errorStyle = {
+            color:"red"
+        }
         return (
             <div>
                 <Link to = "/BuildCourse"><FlatButton {...this.props} style={buttonStyle} label="Build a Course" /></Link>
                 <FlatButton {...this.props} style={buttonStyle} label="Sign Up" onClick = {this.handleSignupOpen} />
                 <FlatButton {...this.props} style={loginButtonStyle} label="Login" onClick={this.handleLoginOpen} />
-            
-            
+                
                 <Dialog
                   title="Login"
                   actions={loginActions}
@@ -280,11 +318,13 @@ class Login extends Component {
                   onRequestClose={this.handleLoginClose}
                 >
                 <form>
+                    <p style={errorStyle}>{this.state.loginError}</p>
                     <label style={labelStyle}>Username</label>
                     <input style = {inputStyle} onChange={this.handleUserNameChange} className = 'textInput' type="text" />
                     <label style = {labelStyle} >Password</label>
                     <input style = {inputStyle} onChange = {this.handlePasswordChange} className = 'textInput' type="password" />
                 </form>
+                <a href = "#" className="forgotPassword">Forgot your password?</a>
                 </Dialog>
             
 
@@ -296,6 +336,7 @@ class Login extends Component {
                   onRequestClose={this.handleSignupClose}
                 >
                 <form>
+                    <p style={errorStyle}>{this.state.signUpError}</p>
                     <label style={labelStyle}>Enter your Email</label>
                     <input style = {inputStyle} className = 'textInput' type="text" onChange = {this.handleUsernameSignUpChange}/>
                     <label style={labelStyle}>First Name</label>
@@ -332,12 +373,32 @@ class LoggedIn extends Component{
             marginRight: "10px",
             font:"robotica"
         }
+        var vertButtonStyle = {
+            verticalAlign: "middle"
+        }
+        var dropdownButtonStyle = {
+            textDecoration: "none"
+        }
+
         var name = this.props.name + "'s Profile"
         return(
             <div>
                 <Link to = "/BuildCourse"><FlatButton {...this.props} style={buttonStyle} label="Build a Course" /></Link>
-                <Link to = "/Profile"><FlatButton {...this.props} style={greetingStyle} label={name} /></Link>
-                <a href="/"><FlatButton style={buttonStyle} onClick={this.props.signOut} label="Sign Out" /></a>
+
+                  <IconMenu
+                    iconButtonElement={
+                      <IconButton style={vertButtonStyle} ><MoreVertIcon color="grey" /></IconButton>
+                    } 
+                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                  >
+                    <a href = "/MyCourses" style = {dropdownButtonStyle} ><MenuItem style= {dropdownButtonStyle} primaryText="My Courses" /></a>
+                    <Link to = "/BuildCourse" style = {dropdownButtonStyle} ><MenuItem style= {dropdownButtonStyle} primaryText="Build a Course" /></Link>
+                    <Link to ="/Profile" style = {dropdownButtonStyle}><MenuItem primaryText={name} /></Link>
+
+                    <a href = "/" style = {dropdownButtonStyle} onClick={this.props.signOut} ><MenuItem primaryText="Sign out" /></a>
+                  </IconMenu>
+
             </div>
         )
     }

@@ -6,7 +6,7 @@ export default class CourseTitle extends Component{
             <div className="CourseTitleOuter">
                 <div className='block'></div>
 
-                <h1>Introduction to Algebra</h1>
+                <h1>{this.props.Title}</h1>
                 <hr />
                 
             </div>

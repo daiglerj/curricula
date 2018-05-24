@@ -6,7 +6,6 @@ import PasswordChange from "./PasswordChange"
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { connect } from "react-redux"
-
 const mapStateToProps = (state) => {
   return {
       username: state.user.username,
@@ -15,6 +14,8 @@ const mapStateToProps = (state) => {
       lastName: state.user.lastName, 
   } 
 }
+
+
 
 
 const mapDispatchToProps = (dispatch)=>{
@@ -48,7 +49,7 @@ class ProfileContainer extends Component {
             
         return(
             <div>
-                <div className="outerDiv">
+                <div className="Section outerDiv">
                     <h1>Profile</h1>
                     <p>View and edit your information</p>
                     <SideBar switchDisplay = {this.switchDisplay} />
@@ -68,7 +69,6 @@ class SideBar extends Component{
             <div className="sideBar">
                 <button onClick = {()=>this.props.switchDisplay("Basic")}>Basic</button>
                 <button onClick = {()=>this.props.switchDisplay("Password")}>Password</button>
-                <button>Payment</button>
             </div>
         )
     }

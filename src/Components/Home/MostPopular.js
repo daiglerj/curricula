@@ -1,16 +1,32 @@
 import React, {Component} from "react"; 
+import {Link} from 'react-router-dom'
+import { connect } from "react-redux"
+import {setCoursePurchaseID} from "./../../Actions/courseViewActions"
+
+const mapStateToProps = (state)=>{
+    return {
+
+    }
+}
+const mapDispatchToProps=(dispatch)=>{
+    return {
+        setCoursePurchaseID: (id)=>dispatch(setCoursePurchaseID(id)),
+       
+    }  
+}
 
 
-export default class MostPopular extends Component{
+class MostPopular extends Component{
     constructor(props){
         super(props)
     }
-    
+ 
     render(){
+
         return(
             <div>
                 <h1 className="CategoryHeading">Most Popular</h1>
-                <CardHolder />
+                <CardHolder {...this.props} setCoursePurchaseID={this.props.setCoursePurchaseID} />
             </div>
         )
     }
@@ -24,8 +40,18 @@ class CardHolder extends Component{
         }
         return(
             <div style={style}>
-                <Card />
-                <Card />
+                {this.props.courses.map(card=>{
+                    return <Link to="/CourseDetail"><Card 
+                        key={card.ID}
+                        id={card.ID}
+                        title = {card.CourseName}
+                        price = {card.Price}
+                        name = {card.FirstName + " " + card.LastName}
+                        setCoursePurchaseID = {this.props.setCoursePurchaseID}
+                    /></Link>
+
+                })}
+
             </div>
         
         )
@@ -34,8 +60,9 @@ class CardHolder extends Component{
 class Card extends Component {
     constructor(props){
         super(props)
+
     }
-    
+
     render(){
         let style = {
             width: "200px",
@@ -46,7 +73,12 @@ class Card extends Component {
             borderRadius: "9px",
             cursor:"pointer",
             display:"inline-block",
-            textAlign:"Left"
+            textAlign:"Left",
+            verticalAlign:"middle",
+            position:"relative",
+            padding:"10px",
+            marginTop:"20px",
+            background:"white"
             
         }
         let titleStyle = {
@@ -63,23 +95,34 @@ class Card extends Component {
             marginTop:"5px",
             paddingBottom: "10px",
             borderBottom: "solid 1px",
-            width: "150px"
+            width: "150px",
+            position:"absolute",
+            bottom: "100px"
 
         }
-        let price = {
-            position:"relative",
-            top: "45px",
-            left:"150px",
+
+        let price = "$" + this.props.price
+        if (price=="$0"){
+            price = "Free"
+
+        }
+        let priceStyle = {
+            position:"absolute",
+            right: "20px",
+            bottom:"18px",
             fontSize: "25px",
             color: "#82ca9c"
         }
+
         return(
-           <div style={style}>
-                <h1 style={titleStyle}>Introduction to Algebra 101</h1>
-                <p style = {paragraphStyle}>John Flickenger</p>
-                <span style={price}>$20</span>
+           <div style={style} onClick = {()=>this.props.setCoursePurchaseID(this.props.id)}>
+                <h1 style={titleStyle}>{this.props.title}</h1>
+                <p style = {paragraphStyle}>{this.props.name}</p>
+                <span style={priceStyle}>{price}</span>
            </div>
         )
 
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MostPopular)

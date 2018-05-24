@@ -5,16 +5,42 @@ import Jumbotron from "./../Components/Jumbotron"
 import CourseSearch from "./../Components/CourseSearch"
 import MostPopular from "./../Components/Home/MostPopular"
 import RaisedButton from 'material-ui/RaisedButton';
+import {connect} from "react-redux"
 
 
+const mapStateToProps=(state)=>{
+    return {
+        baseURL: state.app.baseURL,
+
+    }
+    this.getAllCourses = this.getAllCourses.bind(this)
+}
 class Home extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            courses: []
+        }
+    }
+  componentDidMount(){
+    this.getAllCourses()
+  }
+  getAllCourses(){
+    let fetchURL = this.props.baseURL + "getAllCourses"
+    fetch(fetchURL).then((response)=>{
+        response.json().then(result=>{
+            console.log(result)
+            this.setState({
+                courses:result
+            })
+        })
+    })
+  }
   render() {
     return (
       <div className="App">
         <Jumbotron />
-        <CourseSearch />
-        <MostPopular />
-        <BottomButtons />
+        <MostPopular courses = {this.state.courses} />
         
       </div>
      
@@ -58,4 +84,4 @@ class LargeButton extends Component{
 
     
 }
-export default Home;
+export default connect(mapStateToProps)(Home)
