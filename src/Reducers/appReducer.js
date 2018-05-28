@@ -1,5 +1,5 @@
 const initialState = {
-    baseURL:"http://localhost:8080/"
+    baseURL:"https://curricula-api.herokuapp.com/"
 }
 
 const appReducer = (state=initialState,action)=>{
