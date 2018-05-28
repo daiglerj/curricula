@@ -167,9 +167,7 @@ export class Chapter extends Component {
 			        >
 			          <Menu>
 			            <MenuItem primaryText="Add a Document" onClick={this.props.addDocumentModalOpen} />
-			            <MenuItem primaryText="Add a Homework" />
-			            <MenuItem primaryText="Add a Quiz" />
-			            <MenuItem primaryText="Add an Exam" />
+
 			          </Menu>
 			        </Popover> 
 
