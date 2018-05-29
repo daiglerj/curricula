@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch)=>{
 class Navbar extends Component {
     render(){
         var navbarStyle = {
-            color:"grey",
+            color:"#51565a",
         }
         let rightElement  = ""
         if(this.props.username ==""){
@@ -258,7 +258,7 @@ class Login extends Component {
     */
     render() {
         var buttonStyle = {
-            color:"grey",
+            color:"#51565a",
         }
         var loginButtonStyle = {
             color: "#82ca9c"
@@ -365,7 +365,7 @@ const BookIcon = (props) => (
 class LoggedIn extends Component{
     render(){
         var buttonStyle = {
-            color:"grey",
+            color:"#51565a",
             marginRight:"10px"
         }
         var greetingStyle={
@@ -410,7 +410,7 @@ class LeftElement extends Component {
             color:"limegreen"
         };
         var labelStyle = {
-            color:"grey",
+            color:"#51565a",
 
           
         }
