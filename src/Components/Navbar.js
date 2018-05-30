@@ -93,7 +93,7 @@ class Login extends Component {
         this.handleUsernameSignUpChange = this.handleUsernameSignUpChange.bind(this)
         this.handlePasswordConfirmChange = this.handlePasswordConfirmChange.bind(this)
         this.handleSignupError = this.handleSignupError.bind(this)
-
+        this.handleTeacherToggle = this.handleTeacherToggle.bind(this)
         //Supporting Functions
         this.signIn = this.signIn.bind(this)
     }
@@ -358,7 +358,7 @@ class Login extends Component {
                     <input style = {inputStyle} className = 'textInput' type="password" onChange = {this.handlePasswordSignUpChange}/>
                     <label style = {labelStyle} >Enter your password again</label>
                     <input style = {inputStyle} className = 'textInput' type="password" onChange = {this.handlePasswordConfirmChange} /> <br />
-                    <input type="checkbox" id="group1" style={checkboxStyle} /> <label for="group1">I am an instructor</label>
+                    <input type="checkbox" id="group1" style={checkboxStyle} onClick = {this.handleTeacherToggle}/> <label for="group1">I am an instructor</label>
                 </form>
                 </Dialog>
             </div>
