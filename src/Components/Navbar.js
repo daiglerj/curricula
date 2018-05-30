@@ -196,7 +196,8 @@ class Login extends Component {
                 Password: this.state.passwordSignUp,
                 FirstName: this.state.firstName,
                 LastName: this.state.lastName,
-                PhoneNumber: 0
+                PhoneNumber: 0,
+                Teacher: this.state.teacher
             })
             
         }
