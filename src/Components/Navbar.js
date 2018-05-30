@@ -76,7 +76,8 @@ class Login extends Component {
             usernameField: "",
             passwordField: "",
             signUpError: "",
-            loginError: ""
+            loginError: "",
+            teacher:false
         }
         this.handleLoginOpen = this.handleLoginOpen.bind(this)
         this.handleLoginClose = this.handleLoginClose.bind(this)
@@ -159,6 +160,13 @@ class Login extends Component {
         this.setState({
             lastName : event.target.value
         })
+    }
+
+    handleTeacherToggle = (event)=>{
+        this.setState({
+            teacher: !this.state.teacher
+        })
+        console.log(this.state.teacher)
     }
     static muiName = 'FlatButton';
 
@@ -274,7 +282,10 @@ class Login extends Component {
         var inputStyle = {
             height: "10px"
         }
-        
+        var checkboxStyle = {
+            marginTop:"30px",
+            display:"inline-block"
+        }
         const loginActions = [
               <FlatButton
                 label="Cancel"
@@ -346,8 +357,8 @@ class Login extends Component {
                     <label style = {labelStyle} >Enter your Password</label>
                     <input style = {inputStyle} className = 'textInput' type="password" onChange = {this.handlePasswordSignUpChange}/>
                     <label style = {labelStyle} >Enter your password again</label>
-                    <input style = {inputStyle} className = 'textInput' type="password" onChange = {this.handlePasswordConfirmChange} />
-
+                    <input style = {inputStyle} className = 'textInput' type="password" onChange = {this.handlePasswordConfirmChange} /> <br />
+                    <input type="checkbox" id="group1" style={checkboxStyle} /> <label for="group1">I am an instructor</label>
                 </form>
                 </Dialog>
             </div>
