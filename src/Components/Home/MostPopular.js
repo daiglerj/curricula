@@ -115,7 +115,7 @@ class Card extends Component {
         }
 
         return(
-           <div style={style} onClick = {()=>this.props.setCoursePurchaseID(this.props.id)}>
+           <div style={style} class="CourseCard" onClick = {()=>this.props.setCoursePurchaseID(this.props.id)}>
                 <h1 style={titleStyle}>{this.props.title}</h1>
                 <p style = {paragraphStyle}>{this.props.name}</p>
                 <span style={priceStyle}>{price}</span>

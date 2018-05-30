@@ -160,7 +160,7 @@ class Card extends Component {
 
 
         return(
-           <div style={style}>
+           <div style={style} >
                 <h1 style={titleStyle}>{this.props.title}</h1>
                 <p style = {paragraphStyle}>{this.props.name}</p>
 
