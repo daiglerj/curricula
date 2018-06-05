@@ -13,7 +13,7 @@ export default class Curriculum extends Component{
 		super(props)
 		this.state = {
 			addDocumentModalOpen:false,
-			chapterFocus: -1
+			chapterFocus: -1,
 		}
 		this.addDocumentModalOpen = this.openAddDocumentModal.bind(this)
 		this.closeAddDocumentModal = this.closeAddDocumentModal.bind(this)
@@ -48,6 +48,8 @@ export default class Curriculum extends Component{
 		})
 		console.log("Hello: " + this.state.chapterFocus)
 	}
+
+
 	render(){
 		const statement = "The Curriculum section is the bread and butter of your course. Provide the materials that would generally be expected in a textbook. Create a tool to be used inside and outside the classroom for students to learn, instructors to teach, and moany to expand their knowledge."
 
@@ -56,12 +58,11 @@ export default class Curriculum extends Component{
 				<Instructions statement = {statement} />
 				{this.props.Chapters.map((c)=>{
 					console.log(c)
-					return <Chapter key={c.ID} chapterID = {c.ID} title = {c.ChapterName} {...this.props} changeChapterFocus = {this.changeChapterFocus} addDocumentModalOpen = {this.addDocumentModalOpen}/>
+					return <Chapter key={c.ID} chapterID = {c.ID} title = {c.ChapterName} {...this.props} changeChapterFocus = {this.changeChapterFocus} addDocumentModalOpen = {this.addDocumentModalOpen} getChapterContent = {this.getChapterContent}/>
 				})}
 				
 				<br />
 				<AddSectionButton {...this.props} baseURL = {this.props.baseURL} />
-				<AddDocumentModal {...this.props} open={this.state.addDocumentModalOpen} closeAddDocumentModal={this.closeAddDocumentModal} ChapterID = {this.state.chapterFocus}/>
 			</div>
 		)
 	}

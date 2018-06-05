@@ -55,14 +55,14 @@ class EditCourse extends Component{
 	}
 
 	getChapters(){
-		let fetchURL = this.props.baseURL + "getChapters/" + this.props.CourseID
+		let fetchURL = this.props.baseURL + "getChapters/" + this.state.courseID
 		console.log(fetchURL)
 		fetch(fetchURL).then((response)=>{
 			response.json().then(result=>{
 				this.setState({
 					Chapters: result
 				})
-				console.log(this.state.Chapters)
+				console.log(result)
 			})
 		})
 	}
@@ -81,7 +81,7 @@ class EditCourse extends Component{
 						/>
 		}
 		else if(this.state.active == "Curriculum"){
-			body = <Curriculum {...this.props}  getChapters = {this.getChapters} Chapters = {this.state.Chapters} CourseID = {this.props.CourseID} />
+			body = <Curriculum {...this.props}  getChapters = {this.getChapters}  Chapters = {this.state.Chapters} CourseID = {this.props.CourseID} />
 		}
 		let style ={
 			padding:"50px",

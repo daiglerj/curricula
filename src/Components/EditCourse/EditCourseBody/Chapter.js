@@ -20,7 +20,8 @@ export class Chapter extends Component {
 			open:false,
 			expanded:false,
 			deletePromptOpen: false,
-			content: []
+			content: [],
+			addDocumentModalOpen: false
 
 		}
 		this.handleAddClick = this.handleAddClick.bind(this)
@@ -29,12 +30,14 @@ export class Chapter extends Component {
 		this.handleDeletePrompt = this.handleDeletePrompt.bind(this)
 		this.handleDeletePromptClose = this.handleDeletePromptClose.bind(this)
 		this.handleDelete = this.handleDelete.bind(this)
+		this.handleOpenAddDocumentModal = this.handleOpenAddDocumentModal.bind(this)
+		this.closeAddDocumentModal = this.handleCloseAddDocumentModal.bind(this)
 		this.getChapterContent = this.getChapterContent.bind(this)
 		this.downloadFile = this.downloadFile.bind(this)
 	}
 	componentWillMount(){
 		this.getChapterContent()
-	}
+	} 
 	downloadFile(fileID, fileName){
 		let fetchURL = this.props.baseURL + "sendFile/" + fileID
 		
@@ -105,7 +108,16 @@ export class Chapter extends Component {
 		this.handleDeletePromptClose()
 
 	}
-
+	handleOpenAddDocumentModal(){
+		this.setState({
+			addDocumentModalOpen:true
+		})
+	}
+	handleCloseAddDocumentModal(){
+		this.setState({
+			addDocumentModalOpen:false
+		})
+	}
 	render(){
 		let expandStyle = {
 			border:"none",
@@ -166,7 +178,7 @@ export class Chapter extends Component {
 
 			        >
 			          <Menu>
-			            <MenuItem primaryText="Add a Document" onClick={this.props.addDocumentModalOpen} />
+			            <MenuItem primaryText="Add a Document" onClick={this.handleOpenAddDocumentModal} />
 
 			          </Menu>
 			        </Popover> 
@@ -179,13 +191,89 @@ export class Chapter extends Component {
 				          onRequestClose={this.handleDeletePromptClose}
 				    >
 		         This action can not be undone!
-		        </Dialog>       
+		        </Dialog>   
+
+		        <AddDocumentModal {...this.props} open={this.state.addDocumentModalOpen} closeAddDocumentModal={this.closeAddDocumentModal} ChapterID = {this.state.chapterFocus} getChapterContent={this.getChapterContent}/>
+    
 			</div> 
 		)
 	}
 }
 
 
+class AddDocumentModal extends Component{
+	constructor(props){
+		super(props)
+		this.state = {
+			file: null
+		}
+		this.onChange = this.onChange.bind(this)
+		this.fileUpload = this.fileUpload.bind(this)
+	}
+	onChange(e){
+		this.setState({
+			file:e.target.files
+		})
+		console.log(e.target.files)
+		console.log(this.state.file)
+	}
 
+	fileUpload(event){
+		console.log(this.state.file)
+		let formData = new FormData()
+		formData.append('file',this.state.file[0])
+		formData.append('courseID',this.props.CourseID)
+
+		let fetchURL = this.props.baseURL + "uploadFile/" + this.props.CourseID + "/" + this.props.chapterID
+		let fetchOptions = {
+			method: "post",
+            body: formData
+		}
+		console.log(fetchOptions)
+		fetch(fetchURL,fetchOptions).then(result=>{
+			console.log(result)
+			this.props.closeAddDocumentModal()
+			this.props.getChapterContent()
+		})
+	}
+
+
+	
+
+	render(){
+		const actions = [
+		      <RaisedButton
+		        label="Cancel"
+		        onClick={this.props.closeAddDocumentModal}
+		        backgroundColor="lightgrey"
+		        labelColor = "white"
+		      />,
+
+		      <RaisedButton
+		        label="Submit"
+		        backgroundColor = "#82ca9c"
+		        onClick={this.fileUpload}
+		        labelColor="white"
+		      />,
+		    ];
+		return(
+			<div>
+				<Dialog
+			          title="Add a document"
+			          actions={actions}
+			          open={this.props.open}
+			          modal={false}
+			          onRequestClose={this.props.closeAddDocumentModal}
+
+			        >
+			    <form>
+		          	<input type="file"  onChange={this.onChange}  />
+		        </form>
+		        </Dialog>
+			</div>
+		)
+	}
+
+}
 
 export default Chapter
