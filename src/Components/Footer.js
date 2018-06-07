@@ -20,6 +20,7 @@ const Top = ()=>{
             <h1>About</h1>
             <p>Connect with instructors</p>
             <p>Build a better classroom</p>
+            <br />
         </div>
     )
 }

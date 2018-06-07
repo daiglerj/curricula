@@ -31,6 +31,8 @@ body{
   padding-bottom: 6rem;
   min-height: 100%;
   background: #eee;
+      max-width: 100% !important;
+    overflow-x: hidden !important;
 }
 .Jumbotron{
     background-color: #868f98;
@@ -144,6 +146,7 @@ select option:disabled{
     width:100%;
     position: absolute;
     bottom:0;
+    box-sizing:border-box;
 }
 #TopFooter h1{
     font-size: 15px;
@@ -301,6 +304,10 @@ select option:disabled{
 .forgotPassword{
     margin-top:30px;
     display: block;
+}
+
+.CourseCard{
+    
 }
 
 .CourseCard:hover{
