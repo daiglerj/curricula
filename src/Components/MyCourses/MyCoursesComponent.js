@@ -108,9 +108,15 @@ class AuthoredCourses extends Component{
 			marginTop: "70px",
 			width: "70%"
 		}
+		let body = ""
+		if(this.state.AuthoredCourses.length == 0){
+			body = "You haven't written any courses"
+		}
+
 		return(
 			<div class = "Section" style = {style}>
 				<h1>Courses I Wrote</h1>
+				<p>{body}</p>
 				{this.state.AuthoredCourses.map(course=>{
 					console.log(course)
 					return <a href="/EditCourse"><span onClick={()=>this.props.setCourseEditID(course.ID)}> <Card key = {course.CourseID} title = {course.CourseName} name = {course.author}  /></span></a>
