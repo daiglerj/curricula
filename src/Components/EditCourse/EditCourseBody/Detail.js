@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 export default class Detail extends Component{
 
 	render(){
-		const statement = "This Overview section is what your students and instructors will see first. Create an intriguing title and a description to explain what the course covers. Then, let the world know why this course is for them, what will be learned, and what is needed to get there."
+		const statement = "Add the finishing touches and price your course to sell. Get ready to share your knowledge and utilize the course inside the course inside the classroom."
         var ButtonStyle = {
             marginTop: "30px",
             display: "inline-block",
