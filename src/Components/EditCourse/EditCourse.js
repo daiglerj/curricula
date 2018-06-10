@@ -2,6 +2,8 @@ import React, {Component} from "react"
 import {CourseHeader} from "./CourseHeader"
 import Overview from "./EditCourseBody/Overview"
 import Curriculum from "./EditCourseBody/Curriculum"
+import Detail from "./EditCourseBody/Detail"
+
 import "./../../App.css"
 import { connect } from "react-redux"
 
@@ -46,7 +48,8 @@ class EditCourse extends Component{
 					author: result[0].FirstName + " " + result[0].LastName,
 					courseName: result[0].CourseName,
 					description: result[0].Description,
-					subtitle: result[0].Subtitle
+					subtitle: result[0].Subtitle,
+					price: result[0].Price
 
 				})
 			})
@@ -83,13 +86,16 @@ class EditCourse extends Component{
 		else if(this.state.active == "Curriculum"){
 			body = <Curriculum {...this.props}  getChapters = {this.getChapters}  Chapters = {this.state.Chapters} CourseID = {this.props.CourseID} />
 		}
+		else{
+			body = <Detail {...this.props} price={this.state.price} />
+		}
 		let style ={
 			padding:"50px",
 		}
 		return(
 			<div> 
 				<CourseHeader courseTitle = {this.state.courseName} author = {this.state.author} {...this.props} changeActive={this.changeActive} Description = {this.description} active={this.state.active}/>
-				<div style = {style}>	
+				<div style = {style}>
 					{body}
 				</div>
 
