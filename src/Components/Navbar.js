@@ -418,19 +418,24 @@ class LoggedIn extends Component{
 class LeftElement extends Component {
     render(){
         var iconStyles = {
-            marginRight: 24,
+            marginRight: 0,
             color:"limegreen"
         };
         var labelStyle = {
             color:"#51565a",
+            textDecoration:"none",
+            verticalAlign:"middle",
+            marginLeft:"0px"
 
           
+        }
+        var style={
+            fontWeight:"bold"
         }
         return(
             <div>
                 <FlatButton
                   href="/"
-                  label="Curricula"
                   hoverColor="None"
                   labelStyle = {labelStyle}
                   secondary={true}
@@ -438,7 +443,7 @@ class LeftElement extends Component {
                   style= {iconStyles}
                   disableTouchRipple
                 />
-                
+                <a style = {labelStyle} href = "/"><span style={style}>Curricula</span>Education</a>
             </div>
         )
     }
