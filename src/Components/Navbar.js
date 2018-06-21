@@ -336,7 +336,7 @@ class Login extends Component {
                     <label style = {labelStyle} >Password</label>
                     <input style = {inputStyle} onChange = {this.handlePasswordChange} className = 'textInput' type="password" />
                 </form>
-                <a href = "#" className="forgotPassword">Forgot your password?</a>
+                <a href = "/ForgotPassword" className="forgotPassword">Forgot your password?</a>
                 </Dialog>
             
 
