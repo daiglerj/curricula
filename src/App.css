@@ -27,11 +27,11 @@ body{
     color: #868f98;
     min-height: 100%;
     position: relative;
-      margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
-  background: #eee;
-      max-width: 100% !important;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    background: #eee;
+    max-width: 100% !important;
     overflow-x: hidden !important;
 }
 .Jumbotron{
@@ -59,6 +59,10 @@ body{
 }
 .textInput:focus{
     outline-color: #82ca9c
+}
+ .small{
+    width: 20%;
+    padding:6px;
 }
 .BuildCourse{
     background-color: white;
