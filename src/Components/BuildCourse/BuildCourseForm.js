@@ -135,7 +135,7 @@ export class BuildCourseForm extends Component{
                 if(response.status==200){
                     this.props.setCourseID(result.insertId)
 
-                    window.location = 'http://localhost:3000/EditCourse';
+                    window.location = '/EditCourse';
                 }
                 else{
                     this.setError(result.message)
