@@ -43,13 +43,14 @@ class EditCourse extends Component{
 		console.log(fetchURL)
 		fetch(fetchURL).then(response=>{
 			response.json().then(result=>{
-				console.log(result)
+				console.log("Result: " + result[0].Live)
 				this.setState({
 					author: result[0].FirstName + " " + result[0].LastName,
 					courseName: result[0].CourseName,
 					description: result[0].Description,
 					subtitle: result[0].Subtitle,
-					price: result[0].Price
+					price: result[0].Price,
+					isLive: result[0].Live
 
 				})
 			})
@@ -87,7 +88,7 @@ class EditCourse extends Component{
 			body = <Curriculum {...this.props}  getChapters = {this.getChapters}  Chapters = {this.state.Chapters} CourseID = {this.props.CourseID} />
 		}
 		else{
-			body = <Detail {...this.props} price={this.state.price} />
+			body = <Detail {...this.props} isLive = {this.state.isLive} price={this.state.price} />
 		}
 		let style ={
 			padding:"50px",

@@ -3,6 +3,7 @@ import "./../../../CSS/EditCourse.css"
 import Instructions from "./../../Instructions"
 import "./../../../App.css"
 import RaisedButton from 'material-ui/RaisedButton';
+import Switch from '@material-ui/core/Switch';
 
 export default class Detail extends Component{
 
@@ -28,11 +29,14 @@ class DetailFields extends Component {
 		super(props)
 		this.state = {
 			price: this.props.price,
-			requiredMaterials:""
+			requiredMaterials:"",
+			checkedLive: this.props.isLive
 		}
 		this.handlePriceChange = this.handlePriceChange.bind(this)
 		this.handleMaterialsChange = this.handleMaterialsChange.bind(this)
 		this.handleOnSubmit = this.handleOnSubmit.bind(this)
+		this.handleLiveChange = this.handleLiveChange.bind(this)
+		this.setLive = this.setLive.bind(this)
 	}
 	handlePriceChange(event){
 		this.setState({
@@ -44,6 +48,11 @@ class DetailFields extends Component {
 		this.setState({
 			requiredMaterials: event.target.value
 		})
+	}
+
+	handleLiveChange = event=>{
+		this.setState({ checkedLive: !this.state.checkedLive });
+
 	}
 
 	handleOnSubmit(event){
@@ -59,16 +68,36 @@ class DetailFields extends Component {
             })		
         }
         fetch(fetchURL,fetchBody)
-
-
+        this.setLive()
 
 	}
+
+	setLive(){
+		let fetchURL = this.props.baseURL + "setLive"
+		let fetchBody = {
+			method:"put",
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                LiveStatus: this.state.checkedLive,
+                CourseID: this.props.CourseID
+            })		
+        }
+        fetch(fetchURL,fetchBody)
+
+	}		
+	
 	render(){
 		var ButtonStyle = {
             marginTop: "30px",
             display: "inline-block",
             textAlign:"center"
             
+        }
+        var switchStyle = {
+        	position:"relative",
+        	right:"70px"
         }
         var price = this.state.price
         if(price==0){
@@ -80,6 +109,15 @@ class DetailFields extends Component {
 		return(
 			<div>
 				<form className="Detail">
+					<label>Published</label>
+					<div style = {switchStyle}>
+						<Switch
+						          checked={this.state.checkedLive}
+						          onClick = {this.handleLiveChange}
+						          value="checkedLive"
+						          color='primary'
+						/>
+					</div>
 					<label>Course Price</label>
 					<div class="slidecontainer">
 					  <input type="range" 
