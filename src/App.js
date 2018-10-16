@@ -10,6 +10,8 @@ import EditCourse from "./Routes/EditCourse"
 import MyCourses from "./Routes/MyCourses"
 import ViewCourse from "./Routes/ViewCourse"
 import ForgotPassword from "./Routes/ForgotPassword"
+import EditClass from "./Routes/EditClass"
+
 class App extends Component {
   render() {
     return (
@@ -25,6 +27,7 @@ class App extends Component {
                 <Route  path="/MyCourses" component={()=>{return <MyCourses />}} />
                 <Route  path="/ViewCourse" component={()=>{return <ViewCourse />}} />
                 <Route  path="/ForgotPassword" component={()=>{return <ForgotPassword />}} />
+                <Route  path="/EditClass" component={()=>{return <EditClass />}} />
 
                 <Footer />
             </div>

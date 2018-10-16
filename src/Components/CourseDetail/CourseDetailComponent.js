@@ -2,6 +2,8 @@ import React, {Component} from "react"
 import CourseDescription from "./CourseDescription"
 import CourseTitle from "./CourseTitle"
 import Purchase from "./Purchase"
+import InviteStudents from "./InviteStudents"
+
 import { connect } from "react-redux"
 import {Elements} from 'react-stripe-elements';
 import {StripeProvider} from 'react-stripe-elements';
@@ -19,6 +21,7 @@ const mapStateToProps=(state)=>{
         baseURL: state.app.baseURL,
         ID: state.user.ID,
         coursePurchaseID: state.courseView.coursePurchaseID,
+        teacher: state.user.teacher
 
     }
 }
@@ -35,15 +38,23 @@ class CourseDetail extends Component{
 		}
 		this.getCourseInfo = this.getCourseInfo.bind(this)
 		this.handlePaymentModal = this.handlePaymentModal.bind(this)
+		this.handleGetLinkModal = this.handleGetLinkModal.bind(this)
 	}
 	componentDidMount(){
     	this.getCourseInfo()
+    	console.log(this.props)
     }
+
     handlePaymentModal(){
     	this.setState({
     		paymentModalOpen: !this.state.paymentModalOpen
     	})
     }
+    handleGetLinkModal(){
+    	this.setState({
+    		getLinkOpen:!this.state.getLinkOpen
+    	})
+    } 
     handlePaymentModalClose(){
     	console.log("test")
     	this.setState({
@@ -65,17 +76,25 @@ class CourseDetail extends Component{
 		})
 	}
     render(){
-
-        return(
+    	/*
+    	 * Only includes generate code option if logged in as a teacher
+    	*/
+    	let buttonElement = ""
+    	let modalElement = ""
+    	if(this.props.teacher == 1){
+    		console.log("Here: " + this.props.teacher)
+            modalElement=   <GetLinkModal {...this.props} open ={this.state.getLinkOpen} handleGetLinkModal = {this.handleGetLinkModal} />
+            buttonElement = <InviteStudents handleGetLinkModal = {this.handleGetLinkModal} />
+    	}
+        return(	
             <div>
                 <CourseTitle Title = {this.state.courseName} />
-
+                {buttonElement}
                 <Purchase handlePaymentModal = {this.handlePaymentModal} />
-
                 <Overview />
                 <CourseDescription Description={this.state.description} />
                 <StoreCheckoutModal {...this.props} handlePaymentModal = {this.handlePaymentModal} open = {this.state.paymentModalOpen}/>
-
+                {modalElement}
                 <CourseMaterials {...this.props} />
             </div>
         )
@@ -96,7 +115,6 @@ class StoreCheckoutModal extends Component{
 			          actions={actions}
 			          open={this.props.open}
 			          onRequestClose={this.props.handlePaymentModal}
-
 			        >
 			    	<MyStoreCheckout {...this.props} />
 		        </Dialog>
@@ -117,6 +135,27 @@ class MyStoreCheckout extends React.Component {
   }
 }
 
+class GetLinkModal extends Component {
+	render(){
+		const actions = [
+		]
+		return(
+			<div>
+			<Dialog
+	          title="Get a Shareable Code"
+	          actions={actions}
+	          open={this.props.open}
+	          onRequestClose={this.props.handleGetLinkModal}
+
+	        >
+	        <p>By using a shareable code, you can see which students purchased the course and track their progress</p>
+	        <p>You can view the students that have used the code in your settings</p>
+	        <RaisedButton label="Get Code" />
+		    </Dialog>
+			</div>
+		)
+	}
+}
 class CourseMaterials extends Component{
 	constructor(props){
 		super(props)

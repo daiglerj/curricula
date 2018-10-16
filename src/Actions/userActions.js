@@ -32,3 +32,9 @@ export function signOut(){
     }
 }
 
+export function setTeacher(isTeacher){
+    return{
+        type:"SET_TEACHER",
+        payload:isTeacher
+    }
+}

@@ -1,0 +1,40 @@
+.searchCourse{
+	width: 40%;
+	display: inline-block;
+	position: relative;
+	right: 100px;
+	font-weight: 500;
+	text-align: left;
+}
+
+.searchCourse p{
+	cursor: pointer;
+	margin:0px;
+	padding: 10px;
+	color: #8493ca;
+	text-align: left;
+	font-size: 14px;
+}
+.searchCourse p:hover{
+	background-color: #ddd;
+}
+.remove{
+	border:none;
+	background-color: #fff;
+	cursor:pointer;
+	color:red;
+	font-size: 20px;
+}
+h1{
+	font-size: 25px;
+	font-weight: 400;
+	margin: 5px;
+}
+p{
+	font-size: 15px;
+	margin-top:0px;
+
+}
+input{
+	margin:10px;
+}

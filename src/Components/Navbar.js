@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './../App.css';
 import {Link} from 'react-router-dom'
-import { setUsername, setFirstName, setID, setLastName, signOut } from './../Actions/userActions'
+import { setUsername, setFirstName, setID, setLastName, signOut, setTeacher } from './../Actions/userActions'
 import { connect } from "react-redux"
 
 //Materials Imports
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
   return {
       username: state.user.username,
       baseURL: state.app.baseURL,
-      firstName: state.user.firstName
+      firstName: state.user.firstName,
   }    
 }
 const mapDispatchToProps = (dispatch)=>{
@@ -31,7 +31,8 @@ const mapDispatchToProps = (dispatch)=>{
         setFirstName: (name)=>dispatch(setFirstName(name)),
         setLastName: (name)=>dispatch(setLastName(name)),
         setID: (id)=>dispatch(setID(id)),
-        signOut: ()=>dispatch(signOut())
+        signOut: ()=>dispatch(signOut()),
+        setTeacher: (teacher)=>dispatch(setTeacher(teacher))
     }
 }
 
@@ -48,6 +49,7 @@ class Navbar extends Component {
                                 setFirstName = {this.props.setFirstName}
                                 setLastName={this.props.setLastName}
                                 setID = {this.props.setID}
+                                setTeacher = {this.props.setTeacher}
                             />
 
         }
@@ -256,6 +258,7 @@ class Login extends Component {
                     this.props.setFirstName(result.FirstName)
                     this.props.setLastName(result.LastName)
                     this.props.setID(result.ID)
+                    this.props.setTeacher(result.Teacher)
                     return true
                 })
             }

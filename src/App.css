@@ -317,3 +317,7 @@ select option:disabled{
 .CourseCard:hover{
     box-shadow: 0 4px 8px 0 rgba(0,10,0,0.2);
 }
+
+.MediumMargin{
+    margin: 50px;
+}
