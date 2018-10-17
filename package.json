@@ -17,7 +17,8 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.9.1",
     "redux-promise-middleware": "^5.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "downloadjs":"^1.4.7"
   },
   "scripts": {
     "start": "react-scripts start",
