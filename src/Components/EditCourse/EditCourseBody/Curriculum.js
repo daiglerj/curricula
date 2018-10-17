@@ -4,7 +4,7 @@ import Instructions from "./../../Instructions"
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
 import axios from 'axios';
-import download from 'downloadjs'
+//import download from 'downloadjs'
 import "./../../../App.css"
 				
 
