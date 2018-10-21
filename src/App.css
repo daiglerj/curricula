@@ -321,3 +321,7 @@ select option:disabled{
 .MediumMargin{
     margin: 50px;
 }
+
+.SelectClassComponent{
+    margin:50px;
+}

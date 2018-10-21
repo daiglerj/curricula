@@ -132,7 +132,7 @@ class SearchClass extends Component{
     render(){
         return(
 
-            <div>
+            <div className="SelectClassComponent">
                 <p>Have a code from your instructor? Enter it below!</p>
                 <input class = "textInput small" onChange={this.handleSearchChange} />
                 <RaisedButton label="Search" onClick = {this.toggleModal} />
