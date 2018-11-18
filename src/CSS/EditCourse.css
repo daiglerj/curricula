@@ -40,6 +40,8 @@ body{
 	width :80%;
 	margin:auto;
 	margin-top: 50px;
+	vertical-align: middle;
+
 
 }
 .Box {
@@ -84,21 +86,28 @@ body{
 	outline: none;
 }
 
+
 .Materials li{
 	list-style: none;
 	margin-bottom: 5px;
 	width:83%;
-	cursor:pointer;
-	padding:5px;
+	vertical-align: middle;
+
 }
-.Materials li:hover{
-	background-color: lightgrey;
+
+.docName{
+	display: inline;
+	vertical-align: middle;
+	cursor: pointer
+}
+ .docName:hover{
+	text-decoration: underline;
 }
 .Chapter i {
 	vertical-align: middle;
 	margin-left: 10px;
 	font-size: 30px;
-	cursor: pointer
+	cursor: pointer;
 }
 
 .Detail{
@@ -204,4 +213,14 @@ body{
 	margin:auto;
 	color:white;
 	display: inline-block;
+}
+
+.viewicon{
+    display: inline;
+    margin-left:40px;
+    width:25px;
+    height: 20px;
+    position: relative;
+    top:7px;
+    cursor:pointer;
 }

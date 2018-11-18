@@ -10,6 +10,8 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Dialog from 'material-ui/Dialog';
+import Icon from '@material-ui/core/Icon';
+
 import download from 'downloadjs'
 
 
@@ -34,6 +36,7 @@ export class Chapter extends Component {
 		this.closeAddDocumentModal = this.handleCloseAddDocumentModal.bind(this)
 		this.getChapterContent = this.getChapterContent.bind(this)
 		this.downloadFile = this.downloadFile.bind(this)
+		this.handleChangeVisibility = this.handleChangeVisibility.bind(this)
 	}
 	componentWillMount(){
 		this.getChapterContent()
@@ -48,7 +51,7 @@ export class Chapter extends Component {
 		})
 	}
 	getChapterContent(){
-			let fetchURL = this.props.baseURL + "getChapterContent/" + this.props.chapterID
+			let fetchURL = this.props.baseURL + "getChapterContent/" + this.props.chapterID + "/" + this.props.ID
 			console.log(fetchURL)
 			fetch(fetchURL).then((response)=>{
 				response.json().then(result=>{
@@ -58,7 +61,7 @@ export class Chapter extends Component {
 					console.log(this.state.content)
 				})
 			})
-		}
+	}
 	
 	handleAddClick(event){
 		   event.preventDefault();
@@ -118,6 +121,23 @@ export class Chapter extends Component {
 			addDocumentModalOpen:false
 		})
 	}
+
+
+	//makes a request to change the visibility of an item (instructor view only or not)
+	handleChangeVisibility(contentID){
+		console.log("changing " + contentID)
+		let fetchURL = this.props.baseURL + "setCourseVisibility"
+		let fetchOptions = {
+			method: "put",
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                contentID : contentID
+            })
+		}
+		fetch(fetchURL,fetchOptions)
+	}
 	render(){
 		let expandStyle = {
 			border:"none",
@@ -155,7 +175,7 @@ export class Chapter extends Component {
 				    <CardText expandable={true}>
 				      <ul className="Materials">
 				      	{this.state.content.map(doc=>{
-				      		return <li key = {doc.ID} id={doc.ID} onClick = {()=>this.downloadFile(doc.ID,doc.Name)}>{doc.Name}</li>
+				      		return <li key = {doc.ID} id={doc.ID} ><span className="docName" onClick = {()=>this.downloadFile(doc.ID,doc.Name)}>{doc.Name}</span><span onClick = {()=>this.handleChangeVisibility(doc.ID)}><ViewableIcon /></span></li>
 				      	})}
 				      	
 				      </ul>
@@ -200,7 +220,12 @@ export class Chapter extends Component {
 	}
 }
 
-
+//Mockup for icon that will toggle whether or not an asset is for instructor viewing only 
+const ViewableIcon = () => (
+	<svg class = "viewicon">
+	    <path fill="#000000" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+	</svg>
+);
 class AddDocumentModal extends Component{
 	constructor(props){
 		super(props)
@@ -267,7 +292,8 @@ class AddDocumentModal extends Component{
 
 			        >
 			    <form>
-		          	<input type="file"  onChange={this.onChange}  />
+		          	<input type="file"  onChange={this.onChange}  /><br/>
+		          	<input type = "checkbox" />
 		        </form>
 		        </Dialog>
 			</div>

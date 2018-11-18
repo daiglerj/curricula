@@ -20,9 +20,13 @@ const mapDispatchToProps = (dispatch)=>{
 class ViewCourseComponent extends Component {
 	constructor(props){
 		super(props)
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		let courseID = url.searchParams.get("courseID");
 		this.state = {
 			courseName: "",
-			chapters: []
+			chapters: [],
+			courseID: courseID
 		}
 		this.getCourseInfo = this.getCourseInfo.bind(this)
 		this.getChapters = this.getChapters.bind(this)
@@ -34,7 +38,7 @@ class ViewCourseComponent extends Component {
 	}
 
 	getCourseInfo(){
-		let fetchURL = this.props.baseURL + "getCourseInfo/" + this.props.courseViewID
+		let fetchURL = this.props.baseURL + "getCourseInfo/" + this.state.courseID
 
 		fetch(fetchURL).then(response=>{
 			response.json().then(result=>{
@@ -50,7 +54,7 @@ class ViewCourseComponent extends Component {
 	}
 
 	getChapters(){
-		let fetchURL = this.props.baseURL + "getChapters/" + this.props.courseViewID
+		let fetchURL = this.props.baseURL + "getChapters/" + this.state.courseID
 		fetch(fetchURL).then((response)=>{
 			response.json().then(result=>{
 				this.setState({
@@ -124,7 +128,7 @@ class Chapter extends Component{
 		this.getChapterContent()
 	}
 	getChapterContent(){
-			let fetchURL = this.props.baseURL + "getChapterContent/" + this.props.chapterID
+			let fetchURL = this.props.baseURL + "getChapterContent/" + this.props.chapterID + "/" + this.props.ID
 			console.log(fetchURL)
 			fetch(fetchURL).then((response)=>{
 				response.json().then(result=>{

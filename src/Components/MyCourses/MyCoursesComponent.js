@@ -66,7 +66,7 @@ class MyCoursesComponent extends Component{
 					<h1 >My Courses</h1>
 					<p>{body}</p>
 					{this.state.purchasedCourses.map(course=>{
-						return <a href = "/ViewCourse" ><Card key = {course.CourseID} title = {course.CourseName} name = {course.author} onClick={()=>this.props.setCourseViewID(course.CourseID)} /></a>
+						return <a href = {"/ViewCourse/?courseID=" + course.CourseID}><Card key = {course.CourseID} title = {course.CourseName} name = {course.author} onClick={()=>this.props.setCourseViewID(course.CourseID)} /></a>
 					})}
 				</div>
 				<AuthoredCourses setCourseEditID={this.props.setCourseEditID} {...this.props}/>
@@ -120,7 +120,6 @@ class AuthoredCourses extends Component{
 				<h1>Courses I Wrote</h1>
 				<p>{body}</p>
 				{this.state.AuthoredCourses.map(course=>{
-					console.log(course)
 					return <a href="/EditCourse"><span onClick={()=>this.props.setCourseEditID(course.ID)}> <Card key = {course.CourseID} title = {course.CourseName} name = {course.author}  /></span></a>
 				})}
 			</div>
