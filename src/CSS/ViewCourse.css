@@ -1,8 +1,6 @@
 #header{
-	width: 90%;
 	background-color: #ebebeb;
 	height: 150px;
-	margin:auto;
 	margin-top: 20px;
 	position: relative;
 }
@@ -14,7 +12,7 @@
 	float: left;
 	text-align:left;
 	margin: 0px;
-	margin-top: 20px;
+	margin-top: 20px; 
 	font-weight: 400;
 	color:#555;
 	font-size: 40px;
@@ -42,13 +40,9 @@
 	left:140px;
 }
 #Description{
-	width: 80%;
-	margin:auto;
 	padding-left: 20px;
 	margin-top: 70px;
 	text-align: left;
-	box-shadow: -2px 2px #c4c4c4;
-	border-radius: 5px;
 	padding:20px;
 }
 #Description h1{
@@ -65,10 +59,11 @@
 }
 
 .chapter{
-	width: 70%;
-	margin:auto;
 	margin-top: 20px;
 	text-align: left;
+	width:300px;
+	display: inline-block;
+	vertical-align: top;
 
 }
 .chapterTitle{
@@ -86,4 +81,9 @@
 .documents:hover{
 	text-decoration:underline; 
 }
-
+#leftNavbar{
+	width:30%;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 50px;
+}
